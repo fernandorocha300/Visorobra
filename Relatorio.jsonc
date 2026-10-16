@@ -1,0 +1,82 @@
+{
+  "name": "Relatorio",
+  "type": "object",
+  "properties": {
+    "titulo": {
+      "type": "string",
+      "description": "T\u00edtulo do relat\u00f3rio gerado"
+    },
+    "obra_id": {
+      "type": "string",
+      "description": "ID da obra a que o relat\u00f3rio se refere"
+    },
+    "obra_nome": {
+      "type": "string",
+      "description": "Nome da obra (denormalizado para exibi\u00e7\u00e3o)"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Data inicial do per\u00edodo do relat\u00f3rio"
+    },
+    "data_fim": {
+      "type": "string",
+      "format": "date",
+      "description": "Data final do per\u00edodo do relat\u00f3rio"
+    },
+    "total_fotos": {
+      "type": "number",
+      "description": "Quantidade de fotos inclu\u00eddas no relat\u00f3rio"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL p\u00fablica do arquivo PDF gerado"
+    }
+  },
+  "required": [
+    "titulo",
+    "obra_id",
+    "file_url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

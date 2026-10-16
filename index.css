@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 17% 7%;
+    --foreground: 0 0% 95%;
+    --surface: 220 14% 11%;
+    --card: 221 14% 15%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 14% 11%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 222 17% 7%;
+    --secondary: 221 14% 18%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 221 14% 13%;
+    --muted-foreground: 217 10% 65%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 222 17% 7%;
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 219 16% 21%;
+    --input: 219 16% 21%;
+    --ring: 38 92% 50%;
+    --chart-1: 38 92% 50%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 197 37% 50%;
+    --chart-4: 0 84% 60%;
+    --chart-5: 280 65% 60%;
+    --radius: 0.375rem;
+    --font-heading: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+}
+
+@layer base {
+  :root:not(.dark),
+  .light {
+    --background: 210 20% 97%;
+    --foreground: 222 20% 12%;
+    --surface: 210 20% 94%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 12%;
+    --primary-foreground: 222 17% 7%;
+    --secondary: 214 20% 90%;
+    --secondary-foreground: 222 20% 12%;
+    --muted: 214 20% 92%;
+    --muted-foreground: 218 12% 40%;
+    --accent-foreground: 222 17% 7%;
+    --border: 214 18% 84%;
+    --input: 214 18% 84%;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  /* Overscroll control */
+  main, [class*='overflow'] {
+    overscroll-behavior: none;
+  }
+
+  /* Native-feel: no text selection on interactive chrome */
+  button, a, nav, [role='tab'], .label-mono {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  textarea, input, [contenteditable] {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
+  /* Touch targets for icon-only buttons on touch devices */
+  @media (pointer: coarse) {
+    button {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+}
+
+@layer utilities {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .bg-blueprint {
+    background-color: hsl(var(--background));
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .label-mono {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hatch-meter {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 9px,
+      rgba(255, 255, 255, 0.08) 9px,
+      rgba(255, 255, 255, 0.08) 10px
+    );
+  }
+
+  .amber-pulse {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55);
+    animation: amberPulse 2s infinite;
+  }
+
+  @keyframes amberPulse {
+    0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55); }
+    70% { box-shadow: 0 0 0 14px rgba(245, 158, 11, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  }
+}
+
+/* Mobile accessibility: enforce a 12px minimum font size for the smallest text.
+   Unlayered so it overrides Tailwind's arbitrary-size utilities on mobile. */
+@media (max-width: 768px) {
+  .text-\[0\.5625rem\],
+  .text-\[0\.625rem\] {
+    font-size: 0.75rem;
+  }
+  .label-mono {
+    font-size: 0.75rem;
+  }
+}

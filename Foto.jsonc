@@ -1,0 +1,90 @@
+{
+  "name": "Foto",
+  "type": "object",
+  "properties": {
+    "categoria_id": {
+      "type": "string",
+      "description": "ID da categoria \u00e0 qual a foto pertence"
+    },
+    "obra_id": {
+      "type": "string",
+      "description": "ID da obra (denormalizado para filtros r\u00e1pidos)"
+    },
+    "url_imagem": {
+      "type": "string",
+      "description": "URL da imagem original"
+    },
+    "url_thumbnail": {
+      "type": "string",
+      "description": "URL da miniatura"
+    },
+    "tamanho_kb": {
+      "type": "number",
+      "description": "Tamanho do arquivo em KB"
+    },
+    "data_registro": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data e hora do registro da foto"
+    },
+    "observacao": {
+      "type": "string",
+      "description": "Observa\u00e7\u00e3o textual sobre a foto (opcional)"
+    }
+  },
+  "required": [
+    "categoria_id",
+    "url_imagem",
+    "tamanho_kb"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

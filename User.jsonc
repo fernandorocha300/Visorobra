@@ -1,0 +1,65 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "Papel do usu\u00e1rio: admin (Administrador) ou user (Cliente)",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user"
+    },
+    "plano": {
+      "type": "string",
+      "description": "Plano de assinatura do cliente",
+      "enum": [
+        "BASICO",
+        "PROFISSIONAL",
+        "EMPRESARIAL"
+      ],
+      "default": "BASICO"
+    },
+    "limite_storage_mb": {
+      "type": "number",
+      "description": "Limite de armazenamento em MB por cliente (definido pelo plano)",
+      "default": 5120
+    },
+    "status_assinatura": {
+      "type": "string",
+      "description": "Status da assinatura do cliente",
+      "enum": [
+        "ATIVO",
+        "SUSPENSO"
+      ],
+      "default": "ATIVO"
+    },
+    "nome_perfil": {
+      "type": "string",
+      "description": "Nome de exibi\u00e7\u00e3o personalizado pelo usu\u00e1rio"
+    },
+    "notificacoes_email": {
+      "type": "boolean",
+      "description": "Receber notifica\u00e7\u00f5es por email",
+      "default": true
+    },
+    "densidade": {
+      "type": "string",
+      "description": "Densidade de exibi\u00e7\u00e3o da interface",
+      "enum": [
+        "NORMAL",
+        "COMPACTA"
+      ],
+      "default": "NORMAL"
+    },
+    "confirmar_exclusao": {
+      "type": "boolean",
+      "description": "Exibir confirma\u00e7\u00e3o antes de excluir fotos",
+      "default": true
+    }
+  },
+  "required": [
+    "role"
+  ]
+}
